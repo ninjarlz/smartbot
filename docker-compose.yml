@@ -1,0 +1,28 @@
+version: "3.2"
+services:
+  rabbitmq:
+    image: pcloud/rabbitmq-stomp
+    container_name: 'rabbitmq'
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+      - "61613:61613"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq/
+      - rabbitmq_log:/var/log/rabbitmq/
+    networks:
+      - bridge_net
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    networks:
+      - bridge_net
+    links:
+      - rabbitmq
+volumes:
+  rabbitmq_data:
+  rabbitmq_log:
+networks:
+  bridge_net:
+    driver: bridge
