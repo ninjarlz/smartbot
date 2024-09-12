@@ -13,6 +13,19 @@ java {
 	}
 }
 
+ext {
+	springCloudVersion = '2023.0.1'
+	liquibaseCoreVersion = '4.27.0'
+	testcontainersVersion = '1.19.8'
+	cucumberVersion = '7.17.0'
+	springRetryVersion = '2.0.6'
+	springAspectVersion = '6.1.6'
+	langchain4jVersion = '0.31.0'
+	mockitoVersion = '5.11.0'
+	pgVersion = '42.7.3'
+	modelMapperVersion = '3.2.0'
+}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
@@ -24,29 +37,62 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-activemq'
+	// spring boot starters
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-graphql'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'dev.langchain4j:langchain4j-spring-boot-starter:0.31.0'
-//	implementation 'dev.langchain4j:langchain4j-ollama-spring-boot-starter:0.31.0'
-	implementation 'dev.langchain4j:langchain4j-open-ai-spring-boot-starter:0.31.0'
+	implementation 'org.springframework.boot:spring-boot-starter-activemq'
+
+	// langchain4j
+	implementation "dev.langchain4j:langchain4j-spring-boot-starter:${langchain4jVersion}"
+//	implementation "dev.langchain4j:langchain4j-ollama-spring-boot-starter:${langchain4jVersion}"
+	implementation "dev.langchain4j:langchain4j-open-ai-spring-boot-starter:${langchain4jVersion}"
+
+	// spring retry
+	implementation "org.springframework.retry:spring-retry:${springRetryVersion}"
+
+	// spring aspect
+	implementation "org.springframework:spring-aspects:${springAspectVersion}"
+
+	// implementation
+	implementation "org.postgresql:postgresql:${pgVersion}"
+	implementation "org.liquibase:liquibase-core:${liquibaseCoreVersion}"
+	implementation "org.modelmapper:modelmapper:${modelMapperVersion}"
+
+	// compile
 	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+
+	// annotation
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
-	testImplementation 'org.springframework:spring-webflux'
-	testImplementation 'org.springframework.amqp:spring-rabbit-test'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+	// testAnnotation
+	testAnnotationProcessor 'org.projectlombok:lombok'
+
+	// testCompile
+	testCompileOnly 'org.projectlombok:lombok'
+
+	// test
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+			{
+				exclude group: 'org.mockito', module :'mockito-core'
+			}
 	testImplementation 'org.springframework.graphql:spring-graphql-test'
+	testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
 	testImplementation 'org.springframework.security:spring-security-test'
-	testImplementation 'org.testcontainers:activemq'
-	testImplementation 'org.testcontainers:junit-jupiter'
-	testImplementation 'org.testcontainers:rabbitmq'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+	testImplementation "org.testcontainers:junit-jupiter:${testcontainersVersion}"
+	testImplementation "org.testcontainers:activemq:${testcontainersVersion}"
+	testImplementation "org.testcontainers:postgresql:${testcontainersVersion}"
+	testImplementation "io.cucumber:cucumber-spring:${cucumberVersion}"
+	testImplementation "io.cucumber:cucumber-junit:${cucumberVersion}"
+	testImplementation "io.cucumber:cucumber-java:${cucumberVersion}"
+	testImplementation "io.cucumber:cucumber-junit-platform-engine:${cucumberVersion}"
+	testImplementation "org.junit.platform:junit-platform-suite:1.9.2"
 }
 
 tasks.named('test') {
