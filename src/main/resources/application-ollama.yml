@@ -1,0 +1,8 @@
+langchain4j:
+  ollama:
+    chat-model:
+      model-name: llama3.1
+      temperature: 0.2
+      base-url: http://localhost:11434
+      format: json
+      timeout: 1200s

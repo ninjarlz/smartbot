@@ -1,0 +1,10 @@
+langchain4j:
+  open-ai:
+    chat-model:
+      api-key: ${OPEN_AI_API_KEY}
+      model-name: gpt-3.5-turbo
+      temperature: 0.2
+      log-requests: true
+      log-responses: true
+      response-format: json_object
+      timeout: 1200s
