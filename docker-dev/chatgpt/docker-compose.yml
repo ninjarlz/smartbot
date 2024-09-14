@@ -2,13 +2,14 @@ version: "3.2"
 services:
   activemq:
     image: antonw/activemq-jmx
-    container_name: activemq
+    container_name: activemq-smartbot-chatgpt
     ports:
       - "61616:61616"
       - "8161:8161"
       - "1099:1099"
   db:
     image: postgres
+    container_name: db-smartbot-chatgpt
     ports:
       - "5432:5432"
     restart: always

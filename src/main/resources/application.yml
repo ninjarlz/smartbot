@@ -14,27 +14,6 @@ spring:
         format_sql: true
   liquibase:
     change-log: classpath:database/schema/master.xml
-
-langchain4j:
-  #  Config for locally hosted Llama3 LLM AI model,
-  #  Please note that locally hosted LLMs do not work with @Tool annotations
-  #  in the current langchain4j version - should be fixed in the future release:
-  #  ollama:
-  #    chat-model:
-  #      model-name: llama3
-  #      temperature: 0.7
-  #      base-url: http://localhost:11434
-  #      format: json
-  # Config for cloud Open AI ChatGPT 3.5 LLM AI model:
-  open-ai:
-    chat-model:
-      api-key: ${OPEN_AI_API_KEY}
-      model-name: gpt-3.5-turbo
-      temperature: 0.2
-      log-requests: true
-      log-responses: true
-      response-format: json_object
-
 logging:
   level:
     dev:

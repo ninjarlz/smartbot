@@ -20,7 +20,7 @@ ext {
 	cucumberVersion = '7.17.0'
 	springRetryVersion = '2.0.6'
 	springAspectVersion = '6.1.6'
-	langchain4jVersion = '0.31.0'
+	langchain4jVersion = '0.34.0'
 	mockitoVersion = '5.11.0'
 	pgVersion = '42.7.3'
 	modelMapperVersion = '3.2.0'
@@ -49,7 +49,7 @@ dependencies {
 
 	// langchain4j
 	implementation "dev.langchain4j:langchain4j-spring-boot-starter:${langchain4jVersion}"
-//	implementation "dev.langchain4j:langchain4j-ollama-spring-boot-starter:${langchain4jVersion}"
+	implementation "dev.langchain4j:langchain4j-ollama-spring-boot-starter:${langchain4jVersion}"
 	implementation "dev.langchain4j:langchain4j-open-ai-spring-boot-starter:${langchain4jVersion}"
 
 	// spring retry

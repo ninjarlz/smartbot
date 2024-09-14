@@ -1,0 +1,39 @@
+version: "3.2"
+services:
+  activemq:
+    image: antonw/activemq-jmx
+    container_name: activemq-smartbot-ollama
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+      - "1099:1099"
+  db:
+    image: postgres
+    container_name: db-smartbot-ollama
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      PGUSER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: smartbot
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+  ollama-server:
+    image: ollama/ollama:latest
+    container_name: ollama-smartbot
+    ports:
+      - "11434:11434"
+    volumes:
+      - /root/.ollama
+      - ./entrypoint.sh:/entrypoint.sh
+    tty: true
+    restart: always
+    environment:
+      AIOHTTP_CLIENT_TIMEOUT: 1200
+      DEFAULT_REQUEST_TIMEOUT: 1200
+    entrypoint: [ "/usr/bin/bash", "/entrypoint.sh" ]
