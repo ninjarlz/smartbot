@@ -6,13 +6,12 @@
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
 
     <changeSet author="Michal Kusmidrowicz" id="message-table" >
-        <createTable tableName="MESSAGE">
-            <column name="ID" type="${BIG_INTEGER}">
-                <constraints nullable="false"/>
+        <createTable tableName="message">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="CONTENT" type="${STRING_HUGE}"/>
+            <column name="content" type="${STRING_HUGE}"/>
         </createTable>
-        <addPrimaryKey columnNames="ID" constraintName="PK_MESSAGE" tableName="MESSAGE"/>
     </changeSet>
 
 </databaseChangeLog>

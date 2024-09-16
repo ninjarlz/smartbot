@@ -15,10 +15,6 @@
     <property name="BLOB" value="oid" dbms="postgresql"/>
     <property name="BINARY_RAW" value="BYTEA" dbms="postgresql"/>
 
-    <!-- Numeric definitions -->
-    <property name="BIG_INTEGER" value="NUMERIC" dbms="postgresql"/>
-    <property name="INTEGER" value="NUMBER(10,0)" dbms="postgresql"/>
-
     <!-- Date Time -->
     <property name="DATE" value="TIMESTAMP" dbms="postgresql"/>
 
