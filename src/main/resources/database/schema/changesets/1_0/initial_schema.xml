@@ -11,6 +11,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="content" type="${STRING_HUGE}"/>
+            <column name="timestamp" type="timestamp"/>
         </createTable>
     </changeSet>
 
