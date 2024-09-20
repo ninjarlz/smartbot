@@ -24,6 +24,8 @@ ext {
 	mockitoVersion = '5.11.0'
 	pgVersion = '42.7.3'
 	modelMapperVersion = '3.2.0'
+	apacheCommonsVersion = '3.13.0'
+	logbookVersion = '3.9.0'
 }
 
 configurations {
@@ -41,8 +43,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-graphql'
-//	implementation 'org.springframework.boot:spring-boot-starter-security'
-//	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-activemq'
@@ -59,9 +61,11 @@ dependencies {
 	implementation "org.springframework:spring-aspects:${springAspectVersion}"
 
 	// implementation
+	implementation "org.zalando:logbook-spring-boot-starter:${logbookVersion}"
 	implementation "org.postgresql:postgresql:${pgVersion}"
 	implementation "org.liquibase:liquibase-core:${liquibaseCoreVersion}"
 	implementation "org.modelmapper:modelmapper:${modelMapperVersion}"
+	implementation "org.apache.commons:commons-lang3:${apacheCommonsVersion}"
 
 	// compile
 	compileOnly 'org.projectlombok:lombok'

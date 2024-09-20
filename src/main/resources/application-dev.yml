@@ -3,3 +3,24 @@ spring:
     url: jdbc:postgresql://127.0.0.1:5432/smartbot
     username: postgres
     password: postgres
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://127.0.0.1:8080/oauth2/jwks
+          issuer-uri: http://127.0.0.1:8080
+
+dev-mode:
+  mock-auth-enabled: true
+  mock-auth-permission: write
+  mock-auth-token-timeout: 3600
+  mock-auth-user-id: 1
+
+logging:
+  level:
+    dev:
+      langchain4j: DEBUG
+    org:
+      springframework:
+        security: DEBUG
+    smartbot: DEBUG

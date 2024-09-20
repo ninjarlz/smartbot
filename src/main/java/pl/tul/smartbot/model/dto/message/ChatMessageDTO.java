@@ -1,4 +1,4 @@
-package pl.tul.smartbot.model;
+package pl.tul.smartbot.model.dto.message;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

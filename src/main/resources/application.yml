@@ -14,7 +14,16 @@ spring:
         format_sql: true
   liquibase:
     change-log: classpath:database/schema/master.xml
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${AUTHORIZATION_SERVER_URL}
+          jwk-set-uri: ${AUTHORIZATION_SERVER_URL}${AUTHORIZATION_SERVER_CONTEXT_PATH}/oauth2/jwks
+
 logging:
   level:
     dev:
-      langchain4j: DEBUG
+      langchain4j: INFO
+    root: INFO
+    smartbot: INFO
