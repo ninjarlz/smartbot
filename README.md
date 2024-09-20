@@ -10,6 +10,28 @@ Functionalities:
 * ability to configure chat behaviour by chatbot administrator
 * ability to load additional data per user via configured URLs
 
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+In order to properly build application one might need to install [Java 17](https://www.oracle.com/th/java/technologies/downloads/#java17) and/or [Docker](https://www.docker.com/get-started/).
+
+### Cloning
+
+```
+$ git clone https://github.com/ninjarlz/smartbot
+```
+
+### Building
+
+Using installation of Java 17 and built-in gradle wrapper:
+```
+$ ./gradlew build
+```
+Additionally, one can build & run application using provided [Dockerfile](Dockerfile).
+
 ## Configuration
 
 Contains configuration for:
@@ -47,3 +69,13 @@ Contains configuration for:
 ## Implementation
 
 ## Usage
+
+## Built with
+* [Spring Boot](https://spring.io/projects/spring-boot) - The world’s leading Java web app creation platform
+* [Langchain4j](https://docs.langchain4j.dev) - A Java library designed to facilitate the development of applications leveraging large language models (LLMs) and integrating natural language processing (NLP) capabilities.
+
+## Developers
+* **Michał Kuśmidrowicz** - [ninjarlz](https://github.com/ninjarlz)
+
+## License
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
