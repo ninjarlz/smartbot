@@ -5,13 +5,88 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
 
-    <changeSet author="Michal Kusmidrowicz" id="message-table" >
+    <changeSet author="Michal Kusmidrowicz" id="chat-tables">
+        <!--chat table-->
+        <createTable tableName="chat">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="chat_type" type="${STRING_SMALL}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_message_timestamp" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_message_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addUniqueConstraint
+                columnNames="user_id, chat_type"
+                constraintName="unique_user_id_and_chat_type"
+                tableName="chat"
+        />
+        <!--configuration prompt table-->
+        <createTable tableName="configuration_prompt">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="prompt" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="chat_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <!--dynamic url table-->
+        <createTable tableName="dynamic_url">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="url" type="${STRING_HUGE}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vault_credentials_key" type="${STRING_BIG}"/>
+            <column name="chat_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <!--rag url table-->
+        <createTable tableName="rag_url">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="url" type="${STRING_HUGE}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vault_credentials_key" type="${STRING_BIG}"/>
+            <column name="chat_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <!--message table-->
         <createTable tableName="message">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="content" type="${STRING_HUGE}"/>
-            <column name="timestamp" type="timestamp"/>
+            <column name="content" type="${STRING_HUGE}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="timestamp" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author_type" type="${STRING_SMALL}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="chat_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 
