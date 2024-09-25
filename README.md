@@ -10,7 +10,7 @@ Functionalities:
 * ability to configure chat behaviour by chatbot administrator
 * ability to statically load RAG set of data per user from preconfigured sources
 * ability to dynamically load additional data per user via configured URLs
-* ability to delegate LLM to send emails to preconfigured set of receivers per user
+* ability to delegate LLM to send emails to a preconfigured set of receivers per user
 
 ## Getting Started
 
@@ -18,7 +18,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-In order to properly build application one might need to install [Java 17](https://www.oracle.com/th/java/technologies/downloads/#java17) and/or [Docker](https://www.docker.com/get-started/).
+To properly build an application one might need to install [Java 17](https://www.oracle.com/th/java/technologies/downloads/#java17) and/or [Docker](https://www.docker.com/get-started/).
 
 ### Cloning
 
@@ -28,7 +28,7 @@ $ git clone https://github.com/ninjarlz/smartbot
 
 ### Building
 
-Using installation of Java 17 and built-in gradle wrapper:
+Using the installation of Java 17 and built-in gradle wrapper:
 ```
 $ ./gradlew build
 ```
@@ -49,7 +49,7 @@ Contains configuration for:
             format: json
             timeout: 1200s
       ```
-    * one can use *docker-dev/ollama/docker-compose.yml* file to run required PostgreSQL database, ActiveMQ broker, Vault instance and locally hosted llama3 LLM.
+    * one can use [ollama/docker-compose.yml](docker-dev/ollama/docker-compose.yml) file to run required PostgreSQL database, ActiveMQ broker, Vault instance and locally hosted llama3 LLM.
 
 * **cloud-based ChatGPT 3.5**:
     * *'chatgpt'* Spring profile defined in *application-chatgpt.yml* file:
@@ -65,8 +65,8 @@ Contains configuration for:
             response-format: json_object
             timeout: 1200s
       ```
-    * one can use *docker-dev/chatgpt/docker-compose.yml* file to run required PostgreSQL database, ActiveMQ broker and Vault instance.
-    * one has to provide own Open AI API key exposed as *OPEN_AI_API_KEY* environmental variable.
+    * one can use [chatgpt/docker-compose.yml](docker-dev/chatgpt/docker-compose.yml) file to run the required PostgreSQL database, ActiveMQ broker and Vault instance.
+    * one has to provide one's own Open AI API key exposed as *OPEN_AI_API_KEY* environmental variable.
 
 ## Implementation
 
