@@ -49,7 +49,7 @@ Contains configuration for:
             format: json
             timeout: 1200s
       ```
-    * one can use *docker-dev/ollama/docker-compose.yml* file to run required PostgreSQL database, ActiveMQ broker and locally hosted llama3 LLM.
+    * one can use *docker-dev/ollama/docker-compose.yml* file to run required PostgreSQL database, ActiveMQ broker, Vault instance and locally hosted llama3 LLM.
 
 * **cloud-based ChatGPT 3.5**:
     * *'chatgpt'* Spring profile defined in *application-chatgpt.yml* file:
@@ -65,7 +65,7 @@ Contains configuration for:
             response-format: json_object
             timeout: 1200s
       ```
-    * one can use *docker-dev/chatgpt/docker-compose.yml* file to run required PostgreSQL database and ActiveMQ broker.
+    * one can use *docker-dev/chatgpt/docker-compose.yml* file to run required PostgreSQL database, ActiveMQ broker and Vault instance.
     * one has to provide own Open AI API key exposed as *OPEN_AI_API_KEY* environmental variable.
 
 ## Implementation

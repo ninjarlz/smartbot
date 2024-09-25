@@ -20,10 +20,15 @@ spring:
         jwt:
           issuer-uri: ${AUTHORIZATION_SERVER_URL}
           jwk-set-uri: ${AUTHORIZATION_SERVER_URL}${AUTHORIZATION_SERVER_CONTEXT_PATH}/oauth2/jwks
+  cloud:
+    vault:
+      enabled: true
+      host: ${VAULT_HOST}
+      token: ${VAULT_TOKEN}
 
 logging:
   level:
     dev:
-      langchain4j: INFO
+      langchain4j: ${LOG_LEVEL}
     root: INFO
-    smartbot: INFO
+    smartbot: ${LOG_LEVEL}

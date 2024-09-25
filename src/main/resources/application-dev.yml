@@ -9,6 +9,10 @@ spring:
         jwt:
           jwk-set-uri: http://127.0.0.1:8080/oauth2/jwks
           issuer-uri: http://127.0.0.1:8080
+  cloud:
+    vault:
+      token: 00000000-0000-0000-0000-000000000000
+      host: http://127.0.0.1:8201
 
 dev-mode:
   mock-auth-enabled: true

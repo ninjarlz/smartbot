@@ -14,7 +14,7 @@
             <column name="user_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="chat_type" type="${STRING_SMALL}">
+            <column name="llm_type" type="${STRING_SMALL}">
                 <constraints nullable="false"/>
             </column>
             <column name="created_at" type="bigint">
@@ -28,8 +28,8 @@
             </column>
         </createTable>
         <addUniqueConstraint
-                columnNames="user_id, chat_type"
-                constraintName="unique_user_id_and_chat_type"
+                columnNames="user_id, llm_type"
+                constraintName="unique_user_id_and_llm_type"
                 tableName="chat"
         />
         <!--configuration prompt table-->
