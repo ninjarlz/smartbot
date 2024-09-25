@@ -37,8 +37,8 @@ import static pl.tul.smartbot.util.constant.entity.EntityProperties.CHAT_ID;
 @Builder
 @Entity(name = "chat")
 @Table(uniqueConstraints = @UniqueConstraint(
-        name = "unique_user_id_and_chat_type",
-        columnNames = {"user_id", "chat_type"}
+        name = "unique_user_id_and_llm_type",
+        columnNames = {"user_id", "llm_type"}
 ))
 public class ChatEntity {
 
@@ -52,7 +52,16 @@ public class ChatEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private ChatType chatType;
+    private LlmType llmType;
+
+    @Column(nullable = false)
+    private Long createdAt;
+
+    @Column(nullable = false)
+    private Long lastMessageTimestamp;
+
+    @Column(nullable = false)
+    private Long lastMessageId;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = CHAT_ID)
     @Fetch(FetchMode.SUBSELECT)
@@ -69,13 +78,4 @@ public class ChatEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = CHAT_ID)
     @Fetch(FetchMode.SUBSELECT)
     private Set<MessageEntity> messages;
-
-    @Column(nullable = false)
-    private Long createdAt;
-
-    @Column(nullable = false)
-    private Long lastMessageTimestamp;
-
-    @Column(nullable = false)
-    private Long lastMessageId;
 }

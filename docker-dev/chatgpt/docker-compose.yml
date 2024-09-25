@@ -1,14 +1,14 @@
 version: "3.2"
 services:
   activemq:
-    image: antonw/activemq-jmx
+    image: antonw/activemq-jmx:2.0.1
     container_name: activemq-smartbot-chatgpt
     ports:
       - "61616:61616"
       - "8161:8161"
       - "1099:1099"
   db:
-    image: postgres
+    image: postgres:16.4
     container_name: db-smartbot-chatgpt
     ports:
       - "5432:5432"
@@ -23,3 +23,21 @@ services:
       interval: 1s
       timeout: 5s
       retries: 10
+  vault:
+    image: vault:1.13.3
+    container_name: vault-smartbot-chatgpt
+    ports:
+      - "8201:8201"
+    environment:
+      VAULT_ADDR: 'https://0.0.0.0:8201'
+      VAULT_API_ADDR: 'http://0.0.0.0:8201'
+      VAULT_ADDRESS: 'http://0.0.0.0:8201'
+      VAULT_LOCAL_CONFIG: '{"listener": [{"tcp":{"address": "0.0.0.0:8201","tls_disable":"1"}}], "default_lease_ttl": "168h", "max_lease_ttl": "720h"}, "ui": true}'
+      VAULT_DEV_ROOT_TOKEN_ID: '00000000-0000-0000-0000-000000000000'
+      VAULT_TOKEN: '00000000-0000-0000-0000-000000000000'
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - ./vault/config:/vault/config
+      - ./vault/data:/vault/data
+    command: server -dev -dev-root-token-id="00000000-0000-0000-0000-000000000000"
