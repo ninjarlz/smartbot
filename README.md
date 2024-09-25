@@ -49,7 +49,7 @@ Contains configuration for:
             format: json
             timeout: 1200s
       ```
-    * one can use [ollama/docker-compose.yml](docker-dev/ollama/docker-compose.yml) file to run required PostgreSQL database, ActiveMQ broker, Vault instance and locally hosted llama3 LLM.
+    * one can use [ollama/docker-compose.yml](docker-dev/ollama/docker-compose.yml) file to run the required PostgreSQL database, ActiveMQ broker, Vault instance and locally hosted llama3 LLM.
 
 * **cloud-based ChatGPT 3.5**:
     * *'chatgpt'* Spring profile defined in *application-chatgpt.yml* file:
