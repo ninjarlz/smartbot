@@ -1,4 +1,4 @@
-package pl.tul.smartbot.model.entity;
+package pl.tul.smartbot.model.entity.url;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
