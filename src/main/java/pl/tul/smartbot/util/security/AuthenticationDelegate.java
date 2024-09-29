@@ -1,6 +1,7 @@
 package pl.tul.smartbot.util.security;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import pl.tul.smartbot.exception.security.AuthenticationException;
@@ -9,8 +10,7 @@ import pl.tul.smartbot.model.dto.security.UserDetailsDTO;
 
 import java.util.Optional;
 import java.util.Set;
-
-import static pl.tul.smartbot.util.constant.security.TokenStructure.SCOPES_CLAIM;
+import java.util.stream.Collectors;
 
 /**
  * Delegate allowing to use user and token details stored in security context
@@ -36,7 +36,7 @@ public class AuthenticationDelegate {
      * @return current userId
      */
     public long getUserId() throws AuthenticationException {
-        return getUserDetails().getUserId();
+        return getUserDetails().userId();
     }
 
     /**
@@ -45,7 +45,11 @@ public class AuthenticationDelegate {
      * @return scopes
      */
     public Set<String> getPermissions() throws AuthenticationException {
-        return getAuthentication().getCredentials().getClaim(SCOPES_CLAIM);
+        return getAuthentication()
+                .getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toUnmodifiableSet());
     }
 
     /**
@@ -53,7 +57,7 @@ public class AuthenticationDelegate {
      *
      * @return flag indicating whether token of logged-in user contains given permissions
      */
-    public boolean doesTokenContainsPermissions(String... permissions) throws AuthenticationException {
+    public boolean hasTokenPermissions(String... permissions) throws AuthenticationException {
         return getPermissions().containsAll(Set.of(permissions));
     }
 

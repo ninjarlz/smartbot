@@ -11,10 +11,11 @@ import pl.tul.smartbot.model.dto.security.AuthenticationTokenDTO;
 import pl.tul.smartbot.model.dto.security.UserDetailsDTO;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-import static java.util.Collections.emptyList;
+import static java.util.Collections.emptySet;
 import static java.util.Objects.isNull;
 
 /**
@@ -41,27 +42,27 @@ public class AuthenticationTokenConverter implements Converter<Jwt, Authenticati
      */
     @Override
     public AuthenticationTokenDTO convert(Jwt jwt) {
-        List<SimpleGrantedAuthority> permissionAuthorities = getPermissionAuthorities(jwt);
-        UserDetailsDTO userDetailsDTO = getUserDetails(jwt);
+        Set<SimpleGrantedAuthority> permissionAuthorities = extractPermissionAuthorities(jwt);
+        UserDetailsDTO userDetailsDTO = extractUserDetails(jwt);
         var authenticationTokenDTO = new AuthenticationTokenDTO(permissionAuthorities, jwt, userDetailsDTO);
         authenticationTokenDTO.setAuthenticated(true);
         return authenticationTokenDTO;
     }
 
-    private List<SimpleGrantedAuthority> getPermissionAuthorities(Jwt jwt) {
+    private Set<SimpleGrantedAuthority> extractPermissionAuthorities(Jwt jwt) {
         log.debug("JWT token conversion - extracting permission claims");
 
         @SuppressWarnings("unchecked")
         Collection<String> permissions = (Collection<String>) jwt.getClaims().get(SCOPES_CLAIM);
 
         return Optional.ofNullable(permissions)
-                .orElse(emptyList())
+                .orElse(emptySet())
                 .stream()
                 .map(SimpleGrantedAuthority::new)
-                .toList();
+                .collect(Collectors.toUnmodifiableSet());
     }
 
-    private UserDetailsDTO getUserDetails(Jwt jwt) {
+    private UserDetailsDTO extractUserDetails(Jwt jwt) {
         log.debug("JWT token conversion - extracting user claims");
         Long userId = (Long) jwt.getClaims().get(USER_ID_CLAIM);
         String username = (String) jwt.getClaims().get(USERNAME_CLAIM);
