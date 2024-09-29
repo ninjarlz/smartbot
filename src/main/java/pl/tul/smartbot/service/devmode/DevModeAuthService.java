@@ -22,8 +22,8 @@ import pl.tul.smartbot.model.response.devmode.DevModeAccessTokenResponse;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static org.apache.commons.lang3.BooleanUtils.TRUE;
 import static pl.tul.smartbot.config.properties.devmode.DevModeProperties.DEV_MODE_PREFIX;
@@ -43,8 +43,6 @@ public class DevModeAuthService {
     private static final String SIGNING_ALGORITHM = "RS256";
     private static final String RSA_KEY_ID = "FS_KEY";
     private static final String JWKS_RESPONSE_FORMAT = "{\"keys\": [%s]}";
-
-
 
     private final OAuth2ResourceServerProperties oAuth2ResourceServerProperties;
     private final DevModeProperties devModeProperties;
@@ -95,7 +93,7 @@ public class DevModeAuthService {
     private Map<String, Object> getClaims() {
         return Map.of(
                 USER_ID_CLAIM, devModeProperties.getMockAuthUserId(),
-                SCOPES_CLAIM, List.of(getPermission())
+                SCOPES_CLAIM, Set.of(getPermission())
         );
     }
 

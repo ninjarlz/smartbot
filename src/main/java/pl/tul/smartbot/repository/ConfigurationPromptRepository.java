@@ -1,7 +1,7 @@
 package pl.tul.smartbot.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.tul.smartbot.model.entity.ConfigurationPromptEntity;
+import pl.tul.smartbot.model.entity.prompt.ConfigurationPromptEntity;
 
 /**
  * Interface describing public operations for configuration prompts persistence.

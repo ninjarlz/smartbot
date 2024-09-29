@@ -1,9 +1,7 @@
-package pl.tul.smartbot.model.entity;
+package pl.tul.smartbot.model.entity.prompt;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,7 +14,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * The Entity class for the Message item.
+ * The Entity class for the Configuration Prompt item.
  */
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -25,23 +23,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "message")
-public class MessageEntity {
-
+@Entity(name = "configuration_prompt")
+public class ConfigurationPromptEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
 
     @Column(nullable = false)
-    private Long timestamp;
-
-    @Column(nullable = false)
-    private String content;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private AuthorType authorType;
+    private String prompt;
 
     @Column(nullable = false)
     private Long chatId;

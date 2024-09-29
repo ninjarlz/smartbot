@@ -35,9 +35,7 @@ public class SecurityFilterConfig {
     private final OAuth2ResourceServerProperties oAuth2ResourceServerProperties;
 
     private static final String SUBDIRECTORIES_PATTERN = "/**";
-    private static final String[] ALLOWED_URLS = {
-
-    };
+    private static final String[] ALLOWED_URLS = {};
 
     @Bean
     public JwtDecoder jwtDecoder() {

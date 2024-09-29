@@ -1,4 +1,4 @@
-package pl.tul.smartbot.model.entity;
+package pl.tul.smartbot.model.entity.chat;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -20,6 +20,10 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import pl.tul.smartbot.model.entity.message.MessageEntity;
+import pl.tul.smartbot.model.entity.prompt.ConfigurationPromptEntity;
+import pl.tul.smartbot.model.entity.url.DynamicUrlEntity;
+import pl.tul.smartbot.model.entity.url.RagUrlEntity;
 
 import java.util.Set;
 

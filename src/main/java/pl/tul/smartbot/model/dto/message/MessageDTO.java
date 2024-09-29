@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class ChatMessageDTO {
+public class MessageDTO {
     private String content;
+    private long timestamp;
+    private long chatId;
 }
