@@ -14,7 +14,6 @@ import pl.tul.smartbot.repository.MessageRepository;
 import pl.tul.smartbot.service.chat.ChatService;
 import pl.tul.smartbot.util.security.AuthenticationDelegate;
 
-import static graphql.com.google.common.base.Objects.equal;
 import static pl.tul.smartbot.util.constant.security.Permissions.WRITE_CHATBOT_PERMISSION;
 
 @Service
@@ -32,7 +31,7 @@ public class MessageService {
         ChatDTO chat = chatService.getChat(message.getChatId());
         AuthorType authorType = getAuthorType();
         if (authorType == AuthorType.USER) {
-            throwIfChatNotBelongToUser(chat);
+            throwIfUserIsNotChatMember(chat);
         }
         saveMessage(authorType, message);
         String responseMessageContent = messageAiAssistant.processMessage(message.getContent());
@@ -55,9 +54,9 @@ public class MessageService {
             AuthorType.ADMIN : AuthorType.USER;
     }
 
-    private void throwIfChatNotBelongToUser(ChatDTO chat) throws AuthenticationException, ChatNotFoundException {
+    private void throwIfUserIsNotChatMember(ChatDTO chat) throws AuthenticationException, ChatNotFoundException {
         long userId = authenticationDelegate.getUserId();
-        if (equal(chat.getUserId(), userId)) {
+        if (chat.getUserIds().contains(userId)) {
             return;
         }
         throw new ChatNotFoundException(chat.getId());

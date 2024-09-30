@@ -11,9 +11,6 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="user_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
             <column name="llm_type" type="${STRING_SMALL}">
                 <constraints nullable="false"/>
             </column>
@@ -27,11 +24,25 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addUniqueConstraint
-                columnNames="user_id, llm_type"
-                constraintName="unique_user_id_and_llm_type"
-                tableName="chat"
-        />
+        <!--user table-->
+        <createTable tableName="user">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_type" type="${STRING_SMALL}">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <!--chat user table-->
+        <createTable tableName="chat_user">
+            <column name="chat_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_chat" references="chat(id)"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_user" references="user(id)"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="chat_user" columnNames="chat_id, user_id" constraintName="pk_chat_user"/>
         <!--configuration prompt table-->
         <createTable tableName="configuration_prompt">
             <column name="id" type="bigint" autoIncrement="true">
@@ -41,7 +52,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="chat_id" type="bigint">
-                <constraints nullable="false"/>
+                <constraints nullable="false" foreignKeyName="fk_chat_configuration_prompt" references="chat(id)"/>
             </column>
         </createTable>
         <!--dynamic url table-->
@@ -54,7 +65,7 @@
             </column>
             <column name="vault_credentials_key" type="${STRING_BIG}"/>
             <column name="chat_id" type="bigint">
-                <constraints nullable="false"/>
+                <constraints nullable="false" foreignKeyName="fk_chat_dynamic_url" references="chat(id)"/>
             </column>
         </createTable>
         <!--rag url table-->
@@ -67,7 +78,7 @@
             </column>
             <column name="vault_credentials_key" type="${STRING_BIG}"/>
             <column name="chat_id" type="bigint">
-                <constraints nullable="false"/>
+                <constraints nullable="false" foreignKeyName="fk_chat_rag_url" references="chat(id)"/>
             </column>
         </createTable>
         <!--message table-->
@@ -85,9 +96,8 @@
                 <constraints nullable="false"/>
             </column>
             <column name="chat_id" type="bigint">
-                <constraints nullable="false"/>
+                <constraints nullable="false" foreignKeyName="fk_chat_message" references="chat(id)"/>
             </column>
         </createTable>
     </changeSet>
-
 </databaseChangeLog>

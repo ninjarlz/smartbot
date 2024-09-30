@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.tul.smartbot.model.entity.chat.LlmType;
 
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -14,7 +16,7 @@ public class ChatDTO {
 
     private Long id;
 
-    private Long userId;
+    private Set<Long> userIds;
 
     private LlmType llmType;
 
